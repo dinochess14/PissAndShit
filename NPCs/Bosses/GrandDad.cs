@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +55,7 @@ namespace PissAndShit.NPCs.Bosses
 
             bossBag = mod.ItemType("GrandDadBag");
         }
-        
+
 
         public override void AI()
         {
@@ -68,23 +68,23 @@ namespace PissAndShit.NPCs.Bosses
             {
                 teleportTimer++;
             }
-            if(secondPhase == true)
+            if (secondPhase == true)
             {
                 projectileTimer++;
             }
-            if(npc.life <= npc.lifeMax/2)
+            if (npc.life <= npc.lifeMax / 2)
             {
                 frameNum = 1;
                 secondPhase = true;
             }
-            if(teleportTimer >= 30)
+            if (teleportTimer >= 30)
             {
                 npc.position.X = targetPosition.X + Main.rand.Next(-500, 500);
                 npc.position.Y = targetPosition.Y + Main.rand.Next(-500, 500);
                 Main.PlaySound(SoundID.Item6);
                 teleportTimer = 0;
             }
-            if(projectileTimer >= 180)
+            if (projectileTimer >= 180)
             {
                 Vector2 shootPos = npc.Center;
                 float accuracy = 5f * (npc.life / npc.lifeMax);
@@ -92,24 +92,24 @@ namespace PissAndShit.NPCs.Bosses
                 shootVel.Normalize();
                 shootVel *= 14.5f;
                 projectileShoot = Main.rand.Next(3);
-                for(int i = 0; i < (Main.expertMode ? 2 : 1); i++)
+                for (int i = 0; i < (Main.expertMode ? 2 : 1); i++)
                 {
-                    if(projectileShoot == 0)
+                    if (projectileShoot == 0)
                     {
                         Projectile.NewProjectile(shootPos.X + (float)(-100 * npc.direction) + (float)Main.rand.Next(-20, 20), shootPos.Y - (float)Main.rand.Next(-20, 20), shootVel.X, shootVel.Y, mod.ProjectileType("SevenProj"), npc.damage / 3, 5f);
                     }
-                    if(projectileShoot == 1)
+                    if (projectileShoot == 1)
                     {
                         //needs wario apparition
                     }
-                    if(projectileShoot == 2)
+                    if (projectileShoot == 2)
                     {
                         //needs personalized copies
                     }
                 }
                 projectileTimer = 0;
             }
-            if(player.dead)
+            if (player.dead)
             {
                 canTeleport = false;
                 npc.TargetClosest(false);
@@ -128,7 +128,6 @@ namespace PissAndShit.NPCs.Bosses
         {
             npc.frame.Y = frameNum * frameHeight;
         }
-        
         public override void NPCLoot()
         {
             int bossWeapon = Main.rand.Next(4);
