@@ -128,5 +128,21 @@ namespace PissAndShit.NPCs.Bosses
         {
             npc.frame.Y = frameNum * frameHeight;
         }
+        
+        public override void NPCLoot()
+        {
+            int bossWeapon = Main.rand.Next(4);
+            if(Main.expertMode)
+            {
+                npc.DropBossBags();
+            }
+            else
+            {
+                if (bossWeapon == 0)
+                {
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("SevenShortsword"));
+                }
+            }
+        }
     }
 }
